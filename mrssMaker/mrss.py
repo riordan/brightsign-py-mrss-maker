@@ -4,7 +4,7 @@ import hashlib
 import argparse
 from imagemrss import MRImage
 from six.moves.urllib.parse import urljoin
-import xml.etree.cElementTree as ET
+import xml.etree.ElementTree as ET
 from xml.dom import minidom
 import sys
 
