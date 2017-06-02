@@ -81,43 +81,60 @@ def generateMRSS():
     channel.append(channelTTL)
 
     #############
-    # Geerate images
+    # Generate files in feed
     #############
 
+    # Acceptable mimetypes for MRSS
+    mimes_img=['image/jpeg', 'image/png', 'image/bmp', 'image/jpeg']
+    mimes_vid=['video/ts', 'video/mpg', 'video/vob', 'video/mov', 'video/mp4']
+
     for img in filelist:
-        item = ET.Element('item')
+        if img.mimetype in mimes_img or img.mimetype in mimes_vid:
+            item = ET.Element('item')
 
-        itemTitle = ET.Element('title')
-        itemTitle.text = img.name
-        item.append(itemTitle)
+            itemTitle = ET.Element('title')
+            itemTitle.text = img.name
+            item.append(itemTitle)
 
-        itemLink = ET.Element('link')
-        itemLink.text = img.link
-        item.append(itemLink)
+            itemLink = ET.Element('link')
+            itemLink.text = img.link
+            item.append(itemLink)
 
-        itemCategory = ET.Element('category')
-        itemCategory.text = "image"
-        item.append(itemCategory)
+            itemCategory = ET.Element('category')
+            itemCategory.text = "image"
+            item.append(itemCategory)
 
-        itemDescription = ET.Element('description')
-        itemDescription.text = img.name
-        item.append(itemDescription)
+            itemDescription = ET.Element('description')
+            itemDescription.text = img.name
+            item.append(itemDescription)
 
-        itemGUID = ET.Element('guid', attrib={'isPermaLink':'false'})
-        itemGUID.text = img.fileHash
-        item.append(itemGUID)
+            itemGUID = ET.Element('guid', attrib={'isPermaLink':'false'})
+            itemGUID.text = img.fileHash
+            item.append(itemGUID)
 
-        itemMediaContent = ET.Element('media:content', attrib = {
-        'url':str(img.link),
-        'fileSize':str(img.fileSize),
-        'type':str(img.mimetype),
-        'medium':'image',
-        'duration':str(img.displaytime)
-        })
-        item.append(itemMediaContent)
+            mediaContentAttribs = {
+            'url':str(img.link),
+            'fileSize':str(img.fileSize),
+            'type':str(img.mimetype),
+            'medium':'image',
+            'duration':str(img.displaytime)
+            }
+
+            if img.mimetype in mimes_img:
+                mediaContentAttribs['medium'] = 'image'
+                mediaContentAttribs['duration'] = str(img.displaytime)
+            elif img.mimetype in mimes_vid:
+                mediaContentAttribs['medium'] = 'video'
 
 
-        channel.append(item)
+            itemMediaContent = ET.Element('media:content',
+                                          attrib = mediaContentAttribs)
+            item.append(itemMediaContent)
+
+
+            channel.append(item)
+        else:
+            pass
 
     print(prettify(rss))
 generateMRSS()
