@@ -39,6 +39,10 @@ cd brightsign-py-mrss-maker
 pip install -e .
 ```
 
+For generating video thumbnails, be sure to install ffmpeg
+
+If on a mac, install homebrew and `brew install ffmpeg`
+
 ## Usage
 ```
 mrssMaker
