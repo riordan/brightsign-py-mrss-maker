@@ -7,7 +7,7 @@ setup(name='brightsign-MRSSMaker',
       author='David Riordan',
       author_email='dr@daveriordan.com',
       license='Apache-2.0',
-      packages=['MRSSMaker'],
+      packages=['mrssMaker'],
       install_requires=["six"],
       entry_points={
         'console_scripts': [
