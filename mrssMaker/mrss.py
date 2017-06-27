@@ -115,9 +115,7 @@ def generateMRSS():
             mediaContentAttribs = {
             'url':str(img.link),
             'fileSize':str(img.fileSize),
-            'type':str(img.mimetype),
-            'medium':'image',
-            'duration':str(img.displaytime)
+            'type':str(img.mimetype)
             }
 
             if img.mimetype in mimes_img:
