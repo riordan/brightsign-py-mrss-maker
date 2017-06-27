@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='brightsign-MRSSMaker',
-      version='0.0.2',
+      version='1.0.0',
       description='given a directory of jpegs, generates a brightsign compatible MRSS feed',
       url='http://github.com/riordan/brightsign-py-mrss-maker',
       author='David Riordan',

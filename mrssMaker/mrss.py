@@ -135,4 +135,3 @@ def generateMRSS():
             pass
 
     print(prettify(rss))
-generateMRSS()
